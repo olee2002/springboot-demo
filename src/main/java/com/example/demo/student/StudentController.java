@@ -30,4 +30,9 @@ class StudentController {
         studentService.deleteStudent(studentId);
     }
 
+    @PutMapping(path="{studentId}")
+    public void updateStdent(@RequestBody Student student) throws IllegalAccessException {
+        studentService.updateStudent(student);
+    }
+
 }

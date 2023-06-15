@@ -2,6 +2,7 @@ package com.example.demo.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -37,5 +38,17 @@ public class StudentService {
             throw new IllegalAccessException("This student doesn't exist!");
         }
         studentRepository.deleteById(studentId);
+    }
+
+    @Transactional
+    public void updateStudent(Student student) throws IllegalAccessException {
+        boolean exists = studentRepository.existsById(student.getId());
+        if(!exists){
+            throw new IllegalAccessException("This student doesn't exist");
+        }
+        Optional<Student> student1 = studentRepository.findById(student.getId());
+        if(student.getName() != student1.get().getName() || student.getEmail()!=student1.get().getName()){
+        studentRepository.save(student);
+        }
     }
 }
