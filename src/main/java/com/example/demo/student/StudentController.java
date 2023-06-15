@@ -25,5 +25,9 @@ class StudentController {
     public void registerNewStudent(@RequestBody Student student) throws IllegalAccessException {
         studentService.addNewStudent(student);
     }
+    @DeleteMapping(path = "{studentId}")
+    public void deleteStudent(@PathVariable("studentId") Long studentId) throws IllegalAccessException {
+        studentService.deleteStudent(studentId);
+    }
 
 }
